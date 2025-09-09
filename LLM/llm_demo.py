@@ -1,8 +1,16 @@
-from langchain_openai import OpenAI
+from langchain_huggingface import ChatHuggingFace, HuggingFacePipeline
 from dotenv import load_dotenv
 
 load_dotenv()
 
-llm = OpenAI(model="gpt-3.5-turbo-instruct")
-result = llm.invoke("What is the capital of France?")
-print(result)
+llm = HuggingFacePipeline.from_model_id(
+    model_id="TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+        task="text-generation",
+        pipeline_kwargs=dict(
+        temperature=0.5,
+        max_new_tokens=2048
+        ) 
+    )
+model = ChatHuggingFace(llm=llm)
+result = model.invoke("What is kidney?")
+print(result.content)
