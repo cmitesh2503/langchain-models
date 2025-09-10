@@ -8,9 +8,9 @@ llm = HuggingFacePipeline.from_model_id(
         task="text-generation",
         pipeline_kwargs=dict(
         temperature=0.8,
-        max_new_tokens=2048
+        max_new_tokens=100
         ) 
     )
 model = ChatHuggingFace(llm=llm)
-result = model.invoke("What is kidney?")
+result = model.invoke("Write 5 lines of  poem on Virat Kohli")
 print(result.content)
